@@ -1,0 +1,30 @@
+- hosts: terraform-ansible
+  tasks:
+    # - name: creating files
+    #   copy:
+    #     dest: /home/ubuntu/index.html
+    #     content: <h1>Made with Ansible (2)</h1>
+    # - name: creating new server
+    #   shell: "nohup busybox httpd -f -p 8080 &"
+      - name: Installing python3, virtualenv
+        apt:
+          pkg: 
+            - python3
+            - virtualenv
+          update_cache: yes # update repositories
+        become: yes # run as sudo
+      - name: Installing dependencies with pip (Flask, Django and Django Rest)
+        pip:
+          virtualenv: /home/ubuntu/alura-devops/venv
+          name:
+            - django
+            - djangorestframework
+      - name: Initializing Django Project
+        shell: '. /home/ubuntu/alura-devops/venv/bin/activate; django-admin startproject setup /home/ubuntu/alura-devops' # Activating venv and creating Django project
+      - name: Making changes to Django ALLOWED_HOSTS
+        lineinfile:
+          path: /home/ubuntu/alura-devops/setup/settings.py
+          regexp: 'ALLOWED_HOSTS'
+          line: 'ALLOWED_HOSTS = ["*"]'
+          backrefs: yes # if ALLOWED_HOSTS is not found, do nothing
+          

@@ -17,8 +17,18 @@ resource "aws_instance" "app_server" {
     ami           = "ami-05fb0b8c1424f266b"
     instance_type = "t2.micro"
     key_name      = "alura-devops"
+    # The user_data below will create a file named index.html containing a H1 tag
+    # nohup = keeps the process running | busybox = to execute various unix utilities | httpd = to run in an apache http server
+    # user_data = <<-EOF
+    #     #!/bin/bash
+    #     sudo apt-get update
+    #     cd /home/ubuntu
+    #     echo "<h1>Feito com Terraform</h1>" > index.html
+    #     nohup busybox httpd -f -p 8080 &
+    # EOF
+
 
     tags = {
-        Name = "Alura DevOps - Terraform"
+        Name = "Alura DevOps - Ansible Python"
     }
 }
