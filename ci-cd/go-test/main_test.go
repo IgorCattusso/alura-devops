@@ -25,7 +25,7 @@ func SetupDasRotasDeTeste() *gin.Engine {
 }
 
 func CriaAlunoMock() {
-	aluno := models.Aluno{Nome: "Nome do Aluno Teste", CPF: "12345678901", RG: "123456789"}
+	aluno := models.Aluno{Nome: "Nome do Aluno Teste", CPF: "12345678909", RG: "123456789"}
 	database.DB.Create(&aluno)
 	ID = int(aluno.ID)
 }
@@ -65,7 +65,7 @@ func TestBucaAlunoPorCPFHandler(t *testing.T) {
 	defer DeletaAlunoMock()
 	r := SetupDasRotasDeTeste()
 	r.GET("/alunos/cpf/:cpf", controllers.BuscaAlunoPorCPF)
-	req, _ := http.NewRequest("GET", "/alunos/cpf/12345678901", nil)
+	req, _ := http.NewRequest("GET", "/alunos/cpf/12345678909", nil)
 	resposta := httptest.NewRecorder()
 	r.ServeHTTP(resposta, req)
 	assert.Equal(t, http.StatusOK, resposta.Code)
@@ -84,7 +84,7 @@ func TestBuscaAlunoPorIDHandler(t *testing.T) {
 	var alunoMock models.Aluno
 	json.Unmarshal(resposta.Body.Bytes(), &alunoMock)
 	assert.Equal(t, "Nome do Aluno Teste", alunoMock.Nome, "Os nomes devem ser iguais")
-	assert.Equal(t, "12345678901", alunoMock.CPF)
+	assert.Equal(t, "12345678909", alunoMock.CPF)
 	assert.Equal(t, "123456789", alunoMock.RG)
 	assert.Equal(t, http.StatusOK, resposta.Code)
 }
