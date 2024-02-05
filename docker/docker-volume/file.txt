@@ -1,0 +1,2 @@
+This file will be present in every container initialized with bind mount
+It will be a common directory to "share" files between new containers

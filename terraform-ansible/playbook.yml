@@ -17,9 +17,10 @@
         pip:
           virtualenv: /home/ubuntu/alura-devops/venv
           name:
+            - flask
             - django
             - djangorestframework
-      - name: Initializing Django Project
+      - name: Initializing a basic Django Project
         shell: '. /home/ubuntu/alura-devops/venv/bin/activate; django-admin startproject setup /home/ubuntu/alura-devops' # Activating venv and creating Django project
       - name: Making changes to Django ALLOWED_HOSTS
         lineinfile:

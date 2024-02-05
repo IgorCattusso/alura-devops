@@ -1,0 +1,13 @@
+FROM node:14
+WORKDIR /node-app
+# Set variables to be used by the application. ARG is a build-time variable and ENV is an environment variable
+# The application has no access to ARG, as the ARG value is not available after the image is built.
+# A running container won’t have access to an ARG variable value, hence the use of ENV
+ARG PORT_BUILD=6000
+ENV PORT=$PORT_BUILD
+# Automatically expose the application's port
+EXPOSE $PORT
+# Copy all files on current folder (first .) to the directory specified on the WORKDIR (second .)
+COPY . . 
+RUN npm install
+ENTRYPOINT npm start
