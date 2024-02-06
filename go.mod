@@ -1,6 +1,6 @@
 module github.com/guilhermeonrails/api-go-gin
 
-go 1.15
+go 1.20
 
 require (
 	github.com/gin-gonic/gin v1.7.7
