@@ -3,7 +3,6 @@ module github.com/guilhermeonrails/api-go-gin
 go 1.15
 
 require (
-	github.com/gin-gonic/gin v1.9.1
 	github.com/golang/protobuf v1.5.2 // indirect
 	github.com/jinzhu/now v1.1.4 // indirect
 	github.com/json-iterator/go v1.1.12 // indirect
